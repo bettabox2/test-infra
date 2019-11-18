@@ -1,0 +1,11 @@
+---
+# tasks file for terraform_run
+- name: run terraform
+  terraform:
+    project_path: '../terraform/'
+    state: "{{ state }}"
+    force_init: true
+    backend_config:
+      region: "{aws_region}"
+    variables:
+      aws_ins
