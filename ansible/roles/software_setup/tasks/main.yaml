@@ -1,0 +1,7 @@
+---
+- name: install pkg
+  pkg:
+    - git
+    - docker.io
+    - postgres-client
+  state: present

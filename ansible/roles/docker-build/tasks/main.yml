@@ -1,0 +1,27 @@
+---
+# tasks file for docker-build
+- name: Build image and with build args
+  docker_image:
+    name: "{repo_url}/zabbix-psql"
+    tag: latest
+    build:
+      path: ../../files/zabbix-psql
+      args:
+        log_volume: /var/log/zabbix-psql
+        listen_port: 8080
+    source: build
+    push: yes
+
+
+- name: Start container, connect to network and link
+  docker_container:
+    name: sleeper
+    image: ubuntu:14.04
+    networks:
+      - name: TestingNet
+        ipv4_address: "172.1.1.100"
+        aliases:
+          - sleepyzz
+        links:
+          - db_test:db
+      - name: TestingNet2
